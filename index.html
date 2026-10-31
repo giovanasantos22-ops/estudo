@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Organizador de Estudos</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <h2>EduPlanner</h2>
+      </div>
 
+      <nav class="menu">
+        <button class="nav-btn active" onclick="switchTab('daily')">
+          <i class="fa-solid fa-calendar-day"></i> Diário
+        </button>
+        <button class="nav-btn" onclick="switchTab('monthly')">
+          <i class="fa-solid fa-calendar-days"></i> Mensal
+        </button>
+        <button class="nav-btn" onclick="switchTab('yearly')">
+          <i class="fa-solid fa-calendar"></i> Anual
+        </button>
+        <button class="nav-btn" onclick="switchTab('subjects')">
+          <i class="fa-solid fa-book-open"></i> Matérias
+        </button>
+      </nav>
+
+      <div class="pomodoro-widget">
+        <h3><i class="fa-solid fa-stopwatch"></i> Pomodoro</h3>
+        <div class="timer" id="timer-display">25:00</div>
+        <div class="pomodoro-controls">
+          <button id="start-btn" onclick="startTimer()"><i class="fa-solid fa-play"></i></button>
+          <button id="pause-btn" onclick="pauseTimer()"><i class="fa-solid fa-pause"></i></button>
+          <button id="reset-btn" onclick="resetTimer()"><i class="fa-solid fa-rotate-left"></i></button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <!-- Seção Diária -->
+      <section id="tab-daily" class="tab-content active">
+        <header>
+          <h1>Rotina Diária</h1>
+          <p>Organize suas tarefas e horários de estudo do dia.</p>
+        </header>
+
+        <div class="card-grid">
+          <div class="card">
+            <h2>Nova Tarefa</h2>
+            <form onsubmit="addDailyTask(event)">
+              <input type="text" id="daily-task-input" placeholder="Ex: Estudar Matemática Cap. 3" required />
+              <input type="time" id="daily-task-time" required />
+              <button type="submit" class="btn-primary">Adicionar</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Tarefas do Dia</h2>
+            <ul id="daily-tasks-list" class="item-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Mensal -->
+      <section id="tab-monthly" class="tab-content">
+        <header>
+          <h1>Planejamento Mensal</h1>
+          <p>Anote datas de provas, trabalhos e entregas importantes.</p>
+        </header>
+
+        <div class="card-grid">
+          <div class="card">
+            <h2>Adicionar Evento</h2>
+            <form onsubmit="addMonthlyEvent(event)">
+              <input type="text" id="monthly-title-input" placeholder="Ex: Prova de História" required />
+              <input type="date" id="monthly-date-input" required />
+              <button type="submit" class="btn-primary">Salvar Evento</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Compromissos do Mês</h2>
+            <ul id="monthly-events-list" class="item-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Anual -->
+      <section id="tab-yearly" class="tab-content">
+        <header>
+          <h1>Metas Anuais</h1>
+          <p>Defina seus grandes objetivos para o ano letivo.</p>
+        </header>
+
+        <div class="card-grid">
+          <div class="card">
+            <h2>Nova Meta Anual</h2>
+            <form onsubmit="addYearlyGoal(event)">
+              <input type="text" id="yearly-goal-input" placeholder="Ex: Passar no Vestibular / Tirar 9 em Redação" required />
+              <button type="submit" class="btn-primary">Adicionar Meta</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Suas Metas</h2>
+            <ul id="yearly-goals-list" class="item-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Matérias -->
+      <section id="tab-subjects" class="tab-content">
+        <header>
+          <h1>Progresso de Matérias</h1>
+          <p>Acompanhe seu desempenho em cada disciplina.</p>
+        </header>
+
+        <div class="card-grid">
+          <div class="card">
+            <h2>Cadastrar Matéria</h2>
+            <form onsubmit="addSubject(event)">
+              <input type="text" id="subject-name-input" placeholder="Ex: Física" required />
+              <button type="submit" class="btn-primary">Cadastrar</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Minhas Disciplinas</h2>
+            <ul id="subjects-list" class="item-list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
